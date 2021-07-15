@@ -1,0 +1,66 @@
+
+
+<h2>Books</h2>
+
+<table>
+  <thead>
+    <tr>
+      <td>Title</td>
+      <td>Body</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |hoge| %>
+    <tr>
+      <td><%= hoge.title %></td>
+      <td><%= hoge.body %></td>
+      <td><%= link_to "Show", book_path(hoge) %></td>
+      <td><%= link_to "Edit", edit_book_path(hoge) %></td>
+      <td><%= link_to "Destroy", book_path(hoge), method: :delete %></td>
+    </tr>
+
+
+
+<% end %>
+  </tbody>
+</table>
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>error
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+
+
+<!-- form_with部分 -->
+<%= form_with model:@book, local:true do |f| %>
+
+
+
+
+  <h3>New book</h3>
+  <h5>Title</h5>
+  <%= f.text_field :title %>
+
+
+  <h5>Body</h5>
+  <%= f.text_area :body %>
+
+  <%= f.submit 'Create Book' %>
+
+<% end %>
+
+
+<% if flash[:notice] %>
+     <p id="notice">
+       <%= flash[:notice] %>
+     </p>
+   <% end %>
+   
+   
+   
+
+
